@@ -8,6 +8,15 @@ const app = express();
 const port = 4000;
 
 app.use(express.json());
+app.use((err, req, res, next) => {
+	const statusCode = err.statusCode || 500;
+	const message = err.message || "Internal server error";
+	return res.status(statusCode).json({
+		success: false,
+		statusCode,
+		message,
+	});
+});
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auth", authRouter);
 
