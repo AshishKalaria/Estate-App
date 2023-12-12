@@ -3,10 +3,13 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 dotenv.config();
 import userRouter from "./routes/user.routes.js";
+import authRouter from "./routes/auth.routes.js";
 const app = express();
 const port = 4000;
 
+app.use(express.json());
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.get("*", (req, res) => {
 	res.sendFile(path.resolve(__dirname, "./client", "index.html"));
