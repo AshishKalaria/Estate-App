@@ -4,10 +4,12 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import cookieParser from "cookie-parser";
 const app = express();
 const port = 4000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use((err, req, res, next) => {
 	const statusCode = err.statusCode || 500;
 	const message = err.message || "Internal server error";
